@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VestiOne - Criar Conta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-inter">
+
+  <header class="header-main">
+    <div class="container-custom header-container">
+      <div class="header-logo">
+        <a href="index.html">VestiOne</a>
+      </div>
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="collections_list_page.html">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+      </nav>
+      <a href="collections_list_page.html" class="btn-custom hidden md:inline-block">Explore Agora</a>
+      <button id="mobileMenuButton" class="mobile-menu-button md:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="collections_list_page.html">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+        <a href="collections_list_page.html" class="btn-custom">Explore Agora</a>
+    </div>
+  </header>
+
+  <main class="auth-page-main">
+    <div class="container-custom flex justify-center">
+      <div class="auth-form-container max-w-lg animate-fadeInUp">
+        <h1>Crie a Sua Conta VestiOne</h1>
+        
+        <form id="registerForm" class="auth-form">
+          <div class="form-field-group">
+            <label for="fullName">Nome Completo</label>
+            <input type="text" name="fullName" id="fullName" autocomplete="name" required
+                   class="form-input"
+                   placeholder="Seu nome completo">
+          </div>
+
+          <div class="form-field-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" autocomplete="email" required
+                   class="form-input"
+                   placeholder="seuemail@exemplo.com">
+          </div>
+
+          <div class="form-field-group">
+            <label for="password">Palavra-passe</label>
+            <input type="password" name="password" id="password" autocomplete="new-password" required
+                   class="form-input"
+                   placeholder="Crie uma palavra-passe (mín. 6 caracteres)">
+          </div>
+
+          <div class="form-field-group">
+            <label for="confirmPassword">Confirmar Palavra-passe</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="new-password" required
+                   class="form-input"
+                   placeholder="Repita a palavra-passe">
+          </div>
+          
+          <div class="form-terms-group">
+            <div class="checkbox-wrapper">
+                <input id="terms" name="terms" type="checkbox" required class="form-checkbox">
+            </div>
+            <div class="text-wrapper">
+                <label for="terms">Eu li e aceito os</label>
+                <a href="#"> Termos de Uso</a> e a 
+                <a href="#"> Política de Privacidade</a>.
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="btn-custom w-full py-3 text-lg">
+              Criar Conta
+            </button>
+          </div>
+        </form>
+
+        <div class="auth-switch-link">
+          <p>
+            Já tem uma conta? 
+            <a href="login_page.html">Faça login aqui.</a>
+          </p>
+        </div>
+        <div id="formMessage" class="form-message"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-main">
+    <div class="container-custom footer-content">
+      <div class="footer-logo-social-nav-wrapper">
+        <div class="footer-logo">
+           <a href="index.html">VestiOne</a>
+        </div>
+        <div class="footer-social-links">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+        </div>
+        <div class="footer-nav-links">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+          <a href="#">Suporte</a>
+        </div>
+      </div>
+      <p class="footer-copyright">&copy; 2025 VestiOne. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+             const isHidden = mobileMenu.style.display === 'none' || mobileMenu.style.display === '';
+            mobileMenu.style.display = isHidden ? 'block' : 'none';
+        });
+    }
+
+    const registerForm = document.getElementById('registerForm');
+    const formMessage = document.getElementById('formMessage');
+
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            const fullNameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const termsCheckbox = document.getElementById('terms');
+            let isValid = true;
+            
+            formMessage.textContent = ''; 
+            formMessage.className = 'form-message';
+
+            if (!fullNameInput.value.trim()) {
+                formMessage.textContent = 'Por favor, insira o seu nome completo.';
+                formMessage.classList.add('error');
+                fullNameInput.focus();
+                isValid = false;
+            }
+            else if (!emailInput.value.trim()) {
+                formMessage.textContent = 'Por favor, insira o seu email.';
+                formMessage.classList.add('error');
+                emailInput.focus();
+                isValid = false;
+            } else if (!emailInput.value.includes('@') || !emailInput.value.includes('.')) { 
+                 formMessage.textContent = 'Por favor, insira um email válido.';
+                 formMessage.classList.add('error');
+                emailInput.focus();
+                isValid = false;
+            }
+            else if (!passwordInput.value) {
+                 formMessage.textContent = 'Por favor, crie uma palavra-passe.';
+                 formMessage.classList.add('error');
+                passwordInput.focus();
+                isValid = false;
+            } else if (passwordInput.value.length < 6) {
+                 formMessage.textContent = 'A palavra-passe deve ter no mínimo 6 caracteres.';
+                 formMessage.classList.add('error');
+                passwordInput.focus();
+                isValid = false;
+            }
+            else if (!confirmPasswordInput.value) {
+                 formMessage.textContent = 'Por favor, confirme a sua palavra-passe.';
+                 formMessage.classList.add('error');
+                confirmPasswordInput.focus();
+                isValid = false;
+            } else if (passwordInput.value !== confirmPasswordInput.value) {
+                 formMessage.textContent = 'As palavras-passe não coincidem.';
+                 formMessage.classList.add('error');
+                confirmPasswordInput.focus();
+                isValid = false;
+            }
+            else if (!termsCheckbox.checked) {
+                formMessage.textContent = 'Você deve aceitar os Termos de Uso e a Política de Privacidade.';
+                formMessage.classList.add('error');
+                termsCheckbox.focus();
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+
+            formMessage.textContent = 'A processar o registo...';
+            formMessage.classList.add('info');
+            
+            setTimeout(() => {
+                formMessage.textContent = 'Conta criada com sucesso! Redirecionando para login...';
+                formMessage.className = 'form-message success';
+            }, 1500);
+        });
+    }
+  </script>
+
+</body>
+</html>

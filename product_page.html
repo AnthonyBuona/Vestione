@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VestiOne - Visualizar Produto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> 
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-inter">
+
+  <header class="header-main">
+    <div class="container-custom header-container">
+      <div class="header-logo">
+        <a href="index.html">VestiOne</a>
+      </div>
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="collections_list_page.html">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+      </nav>
+      <a href="collections_list_page.html" class="btn-custom hidden md:inline-block">Explore Agora</a>
+      <button id="mobileMenuButton" class="mobile-menu-button md:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="collections_list_page.html">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+        <a href="collections_list_page.html" class="btn-custom">Explore Agora</a>
+    </div>
+  </header>
+
+  <main class="product-page-main">
+    <div class="container-custom">
+      <nav class="breadcrumbs-nav mb-6" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><span class="separator">/</span><a href="collections_list_page.html">Coleções</a></li>
+          <li id="breadcrumbCollectionContainer" class="hidden"><span class="separator">/</span><a id="breadcrumbCollectionLink" href="#">Nome da Coleção</a></li>
+          <li><span class="separator">/</span><span id="breadcrumbProductName" class="current-page">Nome do Produto</span></li>
+        </ol>
+      </nav>
+
+      <div class="product-layout-grid">
+        <div class="product-gallery-container animate-fadeInUp">
+          <div class="main-image">
+            <img id="mainProductImage" src="https://placehold.co/600x750/E0D7CD/4A4A4A?text=Produto" alt="[Imagem Principal do Produto]">
+          </div>
+          <div id="thumbnailImagesContainer" class="product-thumbnails">
+          </div>
+        </div>
+
+        <div class="product-info-container animate-fadeInUp animation-delay-300">
+          <h1 id="productName" class="product-title">Nome do Produto</h1>
+          <div class="product-rating-reviews">
+            <div id="productRatingStars" class="star-rating">
+            </div>
+            <a href="#reviewsTabContent" id="productReviewCountLink">(0 Avaliações)</a>
+          </div>
+          <p id="productPrice" class="product-price">R$ 0,00</p>
+          <p id="productShortDescription" class="product-short-desc">
+            Breve descrição do produto aparecerá aqui.
+          </p>
+
+          <div id="colorOptionsContainer" class="product-options-group hidden">
+            <h3>Cor: <span id="selectedColorName"></span></h3>
+            <div id="colorSwatches" class="color-swatches">
+            </div>
+          </div>
+
+          <div id="sizeOptionsContainer" class="product-options-group hidden">
+            <h3>Tamanho:</h3>
+            <div id="sizeButtons" class="size-buttons">
+            </div>
+          </div>
+
+          <div class="product-options-group">
+            <h3>Quantidade:</h3>
+            <div class="quantity-selector">
+              <button onclick="updateQuantity(-1)">-</button>
+              <input id="quantityInput" type="text" value="1" readonly>
+              <button onclick="updateQuantity(1)">+</button>
+            </div>
+          </div>
+
+          <div class="product-actions">
+            <button class="btn-custom flex items-center justify-center py-3 px-6 text-lg">
+              <i class="fas fa-shopping-cart mr-2"></i> Adicionar ao Carrinho
+            </button>
+            <button class="btn-outline-custom py-3 px-6 text-lg">Comprar Agora</button>
+          </div>
+
+           <div class="mt-2">
+            <button class="wishlist-button">
+                <i class="far fa-heart"></i> Adicionar à Lista de Desejos
+            </button>
+           </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="py-12 md:py-16 bg-white">
+    <div class="container-custom">
+        <div class="product-tabs-nav">
+            <nav>
+                <button class="tab-button active" data-tab="description" onclick="openTab(event, 'descriptionTabContent', this)">
+                    Descrição Detalhada
+                </button>
+                <button class="tab-button" data-tab="specifications" onclick="openTab(event, 'specificationsTabContent', this)">
+                    Especificações
+                </button>
+                <button id="reviewsTabButton" class="tab-button" data-tab="reviews" onclick="openTab(event, 'reviewsTabContent', this)">
+                    Avaliações (0)
+                </button>
+            </nav>
+        </div>
+
+        <div id="descriptionTabContent" class="product-tab-content active-tab">
+            <h3>Sobre a Peça</h3>
+            <div id="productLongDescription" class="space-y-3">
+                <p>Descrição detalhada do produto aparecerá aqui.</p>
+            </div>
+        </div>
+
+        <div id="specificationsTabContent" class="product-tab-content">
+            <h3>Detalhes Técnicos</h3>
+            <div class="overflow-x-auto">
+                <table class="specifications-table">
+                    <tbody id="productSpecificationsTable">
+                        <tr><td>Material</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="reviewsTabContent" class="product-tab-content">
+            <h3>O que nossos clientes dizem</h3>
+            <div id="productReviewsContainer" class="space-y-6">
+                <p class="text-gray-600">Nenhuma avaliação ainda. Seja o primeiro a avaliar!</p>
+            </div>
+            <div class="review-form-container">
+                <h4>Deixe sua avaliação:</h4>
+                <form id="reviewForm" class="review-form">
+                    <div>
+                        <label for="reviewerName">Seu Nome</label>
+                        <input type="text" id="reviewerName" name="reviewerName" required>
+                    </div>
+                    <div>
+                        <label>Sua Avaliação (Estrelas)</label>
+                        <div class="star-rating interactive-stars">
+                            <i class="far fa-star" data-value="1"></i>
+                            <i class="far fa-star" data-value="2"></i>
+                            <i class="far fa-star" data-value="3"></i>
+                            <i class="far fa-star" data-value="4"></i>
+                            <i class="far fa-star" data-value="5"></i>
+                        </div>
+                        <input type="hidden" id="reviewRatingValue" name="reviewRatingValue" value="0">
+                    </div>
+                    <div>
+                        <label for="reviewText">Comentário</label>
+                        <textarea id="reviewText" name="reviewText" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-custom">Enviar Avaliação</button>
+                    <div id="reviewFormMessage" class="review-form-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="related-products-section">
+    <div class="container-custom">
+      <h2 class="section-title text-center">Você também pode gostar</h2>
+      <div id="relatedProductsGrid" class="related-products-grid">
+        <p class="col-span-full text-center text-gray-500">Carregando produtos relacionados...</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-main">
+    <div class="container-custom footer-content">
+      <div class="footer-logo-social-nav-wrapper">
+        <div class="footer-logo">
+           <a href="index.html">VestiOne</a>
+        </div>
+        <div class="footer-social-links">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+        </div>
+        <div class="footer-nav-links">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+          <a href="#">Suporte</a>
+        </div>
+      </div>
+      <p class="footer-copyright">&copy; 2025 VestiOne. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const allProducts = {
+        "prod001": { 
+            name: "Camisa Linho Branca", 
+            price: "R$ 219,90", 
+            shortDescription: "Camisa elegante de linho puro, perfeita para dias quentes. Caimento leve e sofisticado.",
+            longDescription: "<p>A Camisa de Linho Branca da VestiOne é um item essencial para um guarda-roupa de verão elegante. Feita com 100% linho europeu, oferece respirabilidade incomparável e um toque suave. Seu design clássico com colarinho tradicional e botões de madrepérola adiciona um toque de sofisticação discreta.</p><ul class='list-disc list-inside mt-2 space-y-1'><li>100% Linho Europeu</li><li>Botões de Madrepérola</li><li>Corte Reto Clássico</li><li>Ideal para climas quentes</li></ul>",
+            images: ["images/camisaBranca.png", "images/camisaBranca.png", "images/camisaBranca.png", "images/camisaBranca.png"],
+            thumbnails: ["images/camisaBranca2.png", "images/camisaBranca.png", "images/camisaBranca.png", "images/camisaBranca.png"],
+            altTexts: ["[Imagem da Camisa de Linho Branca - Frente]", "[Imagem da Camisa de Linho Branca - Detalhe]", "[Imagem da Camisa de Linho Branca - Costas]", "[Imagem da Camisa de Linho Branca - Textura]"],
+            colors: [{name: "Branco", hex: "#FFFFFF", default: true}, {name: "Azul Claro", hex: "#ADD8E6"}, {name: "Areia", hex: "#F0E68C"}],
+            sizes: ["P", "M", "G", "GG"],
+            rating: 4.5, reviewCount: 22,
+            specifications: [ {label: "Material Principal", value: "100% Linho Europeu"}, {label: "Origem do Tecido", value: "Itália"}, {label: "Tipo de Colarinho", value: "Tradicional"}, {label: "Cuidados", value: "Lavar à mão ou ciclo delicado. Secar à sombra."}],
+            reviews: [
+                { avatar: "images/mulher.jpg", name: "Ana Beatriz", rating: 5, date: "3 dias atrás", comment: "Amei a camisa! O linho é de ótima qualidade e super fresco."},
+                { avatar: "images/homem", name: "Carlos Silva", rating: 4, date: "1 semana atrás", comment: "Muito bonita e elegante, mas amassou um pouco fácil. Normal para linho, eu acho."}
+            ],
+            relatedIds: ["prod002", "prod009", "prod012", "prod017"] ,
+            collectionKey: "novidades", collectionName: "Novidades"
+        },
+        "prod002": { 
+            name: "Calça Alfaiataria Cinza", 
+            price: "R$ 329,00", 
+            shortDescription: "Calça de alfaiataria com corte moderno em tom cinza versátil. Elegância para o trabalho ou eventos.",
+            longDescription: "<p>Nossa Calça de Alfaiataria Cinza combina o clássico com o contemporâneo. Feita com uma mistura de lã fria e poliéster reciclado, oferece conforto térmico e durabilidade, além de um caimento impecável. Possui cintura alta, pernas retas e bolsos faca discretos.</p><ul class='list-disc list-inside mt-2 space-y-1'><li>Lã fria e Poliéster Reciclado</li><li>Cintura Alta e Pernas Retas</li><li>Forro interno parcial para conforto</li><li>Perfeita para looks formais e casuais chic</li></ul>",
+            images: ["images/calca.jpg", "images/calca.jpg", "https://placehold.co/600x750/A9A9A9/111111?text=Alfaiataria+3"],
+            thumbnails: ["images/calca.jpg", "images/calca.jpg", "images/calca.jpg"],
+            altTexts: ["[Imagem da Calça de Alfaiataria Cinza - Frente]", "[Imagem da Calça de Alfaiataria Cinza - Detalhe do tecido]", "[Imagem da Calça de Alfaiataria Cinza - Modelo vestindo]"],
+            colors: [{name: "Cinza Chumbo", hex: "#696969", default: true}, {name: "Preto", hex: "#000000"}],
+            sizes: ["36", "38", "40", "42", "44"],
+            rating: 5, reviewCount: 15,
+            specifications: [ {label: "Composição", value: "70% Lã Fria, 30% Poliéster Reciclado"}, {label: "Modelagem", value: "Cintura Alta, Perna Reta"}, {label: "Bolsos", value: "2 Laterais (faca), 2 Traseiros Embutidos"}],
+            reviews: [ { avatar: "https://placehold.co/40x40/111/EEE?text=LP", name: "Laura Paiva", rating: 5, date: "1 mês atrás", comment: "Caimento perfeito, tecido maravilhoso. Vale cada centavo!"}],
+            relatedIds: ["prod001", "prod006", "prod017", "prod018"],
+            collectionKey: "alfaiataria", collectionName: "Alfaiataria Moderna"
+        },
+         "prod009": { 
+            name: "Camiseta Algodão Orgânico Preta", 
+            price: "R$ 119,90", 
+            shortDescription: "T-shirt básica essencial em algodão orgânico macio. Conforto e sustentabilidade.",
+            longDescription: "<p>A Camiseta de Algodão Orgânico Preta é a base perfeita para qualquer look minimalista. Feita com algodão 100% orgânico certificado, é incrivelmente macia ao toque e gentil com o planeta. Possui corte clássico e gola redonda reforçada.</p>",
+            images: ["images/camisaBege.png", "images/camisaBege.png"],
+            thumbnails: ["images/camisaBege.png", "images/camisaBege.png"],
+            altTexts: ["[Imagem da Camiseta Preta de Algodão Orgânico]", "[Detalhe da gola da Camiseta Preta]"],
+            colors: [{name: "Preto", hex: "#000000", default: true}, {name: "Branco", hex: "#FFFFFF"}, {name: "Cinza Mescla", hex: "#808080"}],
+            sizes: ["P", "M", "G", "GG", "XG"],
+            rating: 4.8, reviewCount: 30,
+            specifications: [{label: "Material", value: "100% Algodão Orgânico Certificado GOTS"}, {label: "Gola", value: "Redonda"}, {label: "Origem", value: "Brasil"}],
+            reviews: [
+                { avatar: "https://placehold.co/40x40/DDD/000?text=RG", name: "Ricardo Gomes", rating: 5, date: "5 dias atrás", comment: "Melhor camiseta básica que já tive. Macia e veste muito bem."},
+                { avatar: "https://placehold.co/40x40/AAA/FFF?text=MF", name: "Mariana Fernandes", rating: 4, date: "2 semanas atrás", comment: "Gostei bastante, só achei a forma um pouco grande."}
+            ],
+            relatedIds: ["prod010", "prod011", "prod012", "prod004"],
+            collectionKey: "basicos", collectionName: "Básicos Essenciais"
+        }
+    };
+
+    function getStarHTML(rating) {
+        let stars = '';
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        for (let i = 1; i <= 5; i++) {
+            if (i <= fullStars) stars += '<i class="fas fa-star"></i>';
+            else if (i === fullStars + 1 && halfStar) stars += '<i class="fas fa-star-half-alt"></i>';
+            else stars += '<i class="far fa-star empty"></i>';
+        }
+        return stars;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+        const product = allProducts[productId] || allProducts["prod001"]; 
+
+        document.getElementById('breadcrumbProductName').textContent = product.name;
+        if (product.collectionName && product.collectionKey) {
+            const bcCollectionContainer = document.getElementById('breadcrumbCollectionContainer');
+            const bcCollectionLink = document.getElementById('breadcrumbCollectionLink');
+            bcCollectionLink.textContent = product.collectionName;
+            bcCollectionLink.href = `single_collection_page.html?collection=${product.collectionKey}`;
+            bcCollectionContainer.classList.remove('hidden');
+        }
+
+        document.getElementById('productName').textContent = product.name;
+        document.getElementById('productPrice').textContent = product.price;
+        document.getElementById('productShortDescription').textContent = product.shortDescription;
+        document.getElementById('productLongDescription').innerHTML = product.longDescription;
+
+        document.getElementById('mainProductImage').src = product.images[0];
+        document.getElementById('mainProductImage').alt = product.altTexts[0];
+        const thumbnailsContainer = document.getElementById('thumbnailImagesContainer');
+        thumbnailsContainer.innerHTML = ''; 
+        product.thumbnails.forEach((thumbSrc, index) => {
+            const activeClass = index === 0 ? 'active-thumbnail' : '';
+            thumbnailsContainer.innerHTML += `
+                <img src="${thumbSrc}" alt="${product.altTexts[index] || 'Miniatura do Produto'}" 
+                     class="${activeClass}" 
+                     onclick="changeImage('${product.images[index]}', '${product.altTexts[index] || 'Imagem Principal do Produto'}', this)">`;
+        });
+
+        document.getElementById('productRatingStars').innerHTML = getStarHTML(product.rating);
+        document.getElementById('productReviewCountLink').textContent = `(${product.reviewCount} Avaliações)`;
+        document.getElementById('reviewsTabButton').textContent = `Avaliações (${product.reviewCount})`;
+
+        const colorSwatchesContainer = document.getElementById('colorSwatches');
+        const selectedColorNameEl = document.getElementById('selectedColorName');
+        const colorOptionsContainerEl = document.getElementById('colorOptionsContainer');
+        if (product.colors && product.colors.length > 0) {
+            colorSwatchesContainer.innerHTML = '';
+            product.colors.forEach(color => {
+                const isDefault = color.default;
+                if(isDefault && selectedColorNameEl) selectedColorNameEl.textContent = color.name;
+                colorSwatchesContainer.innerHTML += `
+                    <button aria-label="Selecionar cor ${color.name}" 
+                            class="color-swatch-button ${isDefault ? 'active-color' : ''}" 
+                            style="background-color: ${color.hex};"
+                            onclick="selectColor('${color.name}', this)"></button>`;
+            });
+            colorOptionsContainerEl.classList.remove('hidden');
+        } else {
+            colorOptionsContainerEl.classList.add('hidden');
+        }
+
+        const sizeButtonsContainer = document.getElementById('sizeButtons');
+        const sizeOptionsContainerEl = document.getElementById('sizeOptionsContainer');
+        if (product.sizes && product.sizes.length > 0) {
+            sizeButtonsContainer.innerHTML = '';
+            product.sizes.forEach(size => {
+                sizeButtonsContainer.innerHTML += `
+                    <button class="size-button" onclick="selectSize(this)">${size}</button>`;
+            });
+            sizeOptionsContainerEl.classList.remove('hidden');
+        } else {
+            sizeOptionsContainerEl.classList.add('hidden');
+        }
+
+        const specsTable = document.getElementById('productSpecificationsTable');
+        specsTable.innerHTML = ''; 
+        if (product.specifications && product.specifications.length > 0) {
+            product.specifications.forEach(spec => {
+                specsTable.innerHTML += `<tr><td>${spec.label}</td><td>${spec.value}</td></tr>`;
+            });
+        } else {
+            specsTable.innerHTML = '<tr><td colspan="2">Nenhuma especificação disponível.</td></tr>';
+        }
+        
+        const reviewsContainer = document.getElementById('productReviewsContainer');
+        reviewsContainer.innerHTML = ''; 
+        if (product.reviews && product.reviews.length > 0) {
+            product.reviews.forEach(review => {
+                reviewsContainer.innerHTML += `
+                    <div class="review-item">
+                        <div class="review-item-header">
+                            <img src="${review.avatar}" alt="[Avatar de ${review.name}]">
+                            <div>
+                                <h4>${review.name}</h4>
+                                <div class="star-rating">${getStarHTML(review.rating)}</div>
+                            </div>
+                            <span class="review-date">${review.date}</span>
+                        </div>
+                        <p>${review.comment}</p>
+                    </div>`;
+            });
+        } else {
+            reviewsContainer.innerHTML = '<p>Nenhuma avaliação ainda. Seja o primeiro a avaliar!</p>';
+        }
+
+        const relatedGrid = document.getElementById('relatedProductsGrid');
+        relatedGrid.innerHTML = ''; 
+        let relatedCount = 0;
+        if (product.relatedIds && product.relatedIds.length > 0) {
+            product.relatedIds.forEach(relId => {
+                const relProd = allProducts[relId];
+                if (relProd && relatedCount < 4) {
+                    relatedGrid.innerHTML += `
+                        <div class="product-card-item">
+                          <a href="product_page.html?id=${relId}" class="product-card-image-link">
+                            <img src="${(relProd.thumbnails && relProd.thumbnails.length > 0) ? relProd.thumbnails[0] : relProd.images[0]}" alt="[${relProd.name}]">
+                          </a>
+                          <div class="product-card-info">
+                            <h3 class="product-card-title">${relProd.name}</h3>
+                            <p class="product-card-price">${relProd.price}</p>
+                          </div>
+                        </div>`;
+                    relatedCount++;
+                }
+            });
+        }
+        if (relatedCount === 0) {
+            relatedGrid.innerHTML = '<p class="col-span-full text-center text-gray-500">Nenhum produto relacionado encontrado.</p>';
+        }
+
+        const firstTabButton = document.querySelector('.tab-button[data-tab="description"]');
+        if(firstTabButton) openTab(null, 'descriptionTabContent', firstTabButton);
+
+        const reviewStarsContainer = document.querySelector('#reviewForm .interactive-stars');
+        if(reviewStarsContainer){
+            const reviewStars = reviewStarsContainer.querySelectorAll('i');
+            reviewStars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const ratingValue = star.dataset.value;
+                    document.getElementById('reviewRatingValue').value = ratingValue;
+                    reviewStars.forEach((s, index) => {
+                        if (index < ratingValue) {
+                            s.classList.remove('far'); s.classList.add('fas');
+                        } else {
+                            s.classList.remove('fas'); s.classList.add('far');
+                        }
+                    });
+                });
+            });
+        }
+        
+        const reviewForm = document.getElementById('reviewForm');
+        if(reviewForm) {
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const reviewFormMessage = document.getElementById('reviewFormMessage');
+                reviewFormMessage.textContent = 'A enviar avaliação...';
+                reviewFormMessage.className = 'review-form-message info';
+                setTimeout(() => {
+                    reviewFormMessage.textContent = 'Avaliação enviada com sucesso! (Simulação)';
+                    reviewFormMessage.className = 'review-form-message success';
+                    reviewForm.reset();
+                     const reviewStars = reviewStarsContainer.querySelectorAll('i');
+                     reviewStars.forEach(s => {s.classList.remove('fas'); s.classList.add('far');});
+                     document.getElementById('reviewRatingValue').value = "0";
+                }, 1000);
+            });
+        }
+    });
+
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.style.display === 'none' || mobileMenu.style.display === '';
+            mobileMenu.style.display = isHidden ? 'block' : 'none';
+        });
+    }
+
+    function changeImage(newImageSrc, newAltText, clickedThumbnail) {
+        document.getElementById('mainProductImage').src = newImageSrc;
+        document.getElementById('mainProductImage').alt = newAltText;
+        const thumbnails = document.querySelectorAll('.product-thumbnails img');
+        thumbnails.forEach(thumb => thumb.classList.remove('active-thumbnail'));
+        if(clickedThumbnail) clickedThumbnail.classList.add('active-thumbnail');
+    }
+   
+    function selectColor(colorName, clickedButton) {
+        document.getElementById('selectedColorName').textContent = colorName;
+        const colorButtons = clickedButton.parentElement.children;
+        for (let button of colorButtons) {
+            button.classList.remove('active-color');
+        }
+        clickedButton.classList.add('active-color');
+    }
+
+    let selectedSizeButton = null;
+    function selectSize(clickedButton) {
+        if (selectedSizeButton) {
+            selectedSizeButton.classList.remove('active-size');
+        }
+        clickedButton.classList.add('active-size');
+        selectedSizeButton = clickedButton;
+    }
+
+    function updateQuantity(change) {
+        const quantityInput = document.getElementById('quantityInput');
+        let currentValue = parseInt(quantityInput.value);
+        currentValue += change;
+        if (currentValue < 1) currentValue = 1;
+        quantityInput.value = currentValue;
+    }
+
+    function openTab(event, tabName, clickedButtonElement) {
+        let i, tabcontent, tabbuttons;
+        tabcontent = document.getElementsByClassName("product-tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active-tab");
+            tabcontent[i].classList.add("hidden"); // Garante que está escondido se não for ativo
+        }
+        tabbuttons = document.getElementsByClassName("tab-button");
+        for (i = 0; i < tabbuttons.length; i++) {
+            tabbuttons[i].classList.remove("active");
+        }
+        
+        const tabToShow = document.getElementById(tabName);
+        if (tabToShow) {
+            tabToShow.classList.add("active-tab");
+            tabToShow.classList.remove("hidden");
+        }
+        
+        const buttonToActivate = event ? event.currentTarget : clickedButtonElement;
+        if(buttonToActivate) buttonToActivate.classList.add("active");
+    }
+  </script>
+
+</body>
+</html>

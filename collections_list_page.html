@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VestiOne - Coleção</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-inter">
+
+  <header class="header-main">
+    <div class="container-custom header-container">
+      <div class="header-logo">
+        <a href="index.html">VestiOne</a>
+      </div>
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="collections_list_page.html" class="active">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+      </nav>
+      <a href="collections_list_page.html" class="btn-custom hidden md:inline-block">Explore Agora</a>
+      <button id="mobileMenuButton" class="mobile-menu-button md:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="collections_list_page.html" class="active">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+        <a href="collections_list_page.html" class="btn-custom">Explore Agora</a>
+    </div>
+  </header>
+
+  <main class="py-12 md:py-20">
+    <div class="container-custom">
+      <header class="product-list-header">
+        <h1 id="collectionTitle" class="section-title animate-fadeInUp">Coleção</h1>
+        <p id="collectionDescription" class="section-subtitle animate-fadeInUp animation-delay-200">
+          Carregando descrição da coleção...
+        </p>
+      </header>
+
+      <div class="filters-sorting-bar">
+        <p class="product-count"><span id="productCount">0</span> produtos encontrados</p>
+        <div class="sort-options">
+            <label for="sortBy">Ordenar por:</label>
+            <select id="sortBy" name="sortBy">
+                <option value="relevance">Relevância</option>
+                <option value="newest">Mais Recentes</option>
+                <option value="price_asc">Preço: Menor para Maior</option>
+                <option value="price_desc">Preço: Maior para Menor</option>
+            </select>
+        </div>
+      </div>
+
+      <div id="productGrid" class="product-grid">
+        <p class="col-span-full text-center text-gray-500">A carregar produtos...</p>
+      </div>
+
+      <nav id="paginationContainer" class="pagination-nav">
+      </nav>
+
+    </div>
+  </main>
+
+  <footer class="footer-main">
+    <div class="container-custom footer-content">
+      <div class="footer-logo-social-nav-wrapper">
+        <div class="footer-logo">
+           <a href="index.html">VestiOne</a>
+        </div>
+        <div class="footer-social-links">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+        </div>
+        <div class="footer-nav-links">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+          <a href="#">Suporte</a>
+        </div>
+      </div>
+      <p class="footer-copyright">&copy; 2025 VestiOne. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.style.display === 'none' || mobileMenu.style.display === '';
+            mobileMenu.style.display = isHidden ? 'block' : 'none';
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const collectionKey = params.get('collection');
+        const collectionTitleEl = document.getElementById('collectionTitle');
+        const collectionDescriptionEl = document.getElementById('collectionDescription');
+        const productGridEl = document.getElementById('productGrid'); 
+        const productCountEl = document.getElementById('productCount');
+        const paginationContainerEl = document.getElementById('paginationContainer');
+
+        const collectionsData = {
+            "novidades": {
+                title: "Coleção: Novidades",
+                description: "Explore as peças mais recentes que acabaram de chegar à VestiOne. Designs inovadores e tendências que vão renovar seu estilo.",
+                products: [ 
+                    { id: "prod001", name: "Camisa Linho Branca", price: "R$ 219,90", image: "images/camisaBranca.png", alt: "[Imagem do Produto Camisa Linho Branca]"},
+                    { id: "prod002", name: "Calça Alfaiataria Cinza", price: "R$ 329,00", image: "images/calca.jpg", alt: "[Imagem do Produto Calça Alfaiataria Cinza]"},
+                    { id: "prod003", name: "Vestido Midi Preto Essencial", price: "R$ 289,50", image: "images/vestidoPreto.png", alt: "[Imagem do Produto Vestido Midi Preto]"},
+                    { id: "prod004", name: "T-shirt Algodão Pima Bege", price: "R$ 129,90", image: "images/camisaBege.png", alt: "[Imagem do Produto T-shirt Algodão Pima Bege]"},
+                    { id: "prod005", name: "Saia Plissada Nude", price: "R$ 249,00", image: "images/saiaBege.png", alt: "[Imagem do Produto Saia Plissada Nude]"},
+                    { id: "prod006", name: "Blazer Alongado Preto", price: "R$ 420,00", image: "images/blazerPreto.png", alt: "[Imagem do Produto Blazer Alongado Preto]"},
+                    { id: "prod007", name: "Macacão Pantalona Off-white", price: "R$ 399,90", image: "https://placehold.co/400x500/C7BCB0/2A2A2A?text=Novidade+7", alt: "[Imagem do Produto Macacão Pantalona Off-white]"},
+                    { id: "prod008", name: "Suéter Tricô Gola Alta Camelo", price: "R$ 279,00", image: "https://placehold.co/400x500/BDB0A5/1A1A1A?text=Novidade+8", alt: "[Imagem do Produto Suéter Tricô Gola Alta Camelo]"}
+                ]
+            },
+            "basicos": {
+                title: "Coleção: Básicos Essenciais",
+                description: "Peças atemporais e versáteis para construir um guarda-roupa inteligente e funcional para o seu dia a dia.",
+                products: [
+                    { id: "prod009", name: "Camiseta Algodão Orgânico Preta", price: "R$ 119,90", image: "https://placehold.co/400x500/A9A9A9/FFFFFF?text=Básico+1", alt: "[Imagem do Produto Camiseta Preta]"},
+                    { id: "prod010", name: "Jeans Reto Clássico Azul Escuro", price: "R$ 259,00", image: "https://placehold.co/400x500/808080/FFFFFF?text=Básico+2", alt: "[Imagem do Produto Jeans Azul Escuro"},
+                    { id: "prdo011", name: "T-shirt Branca Gola V", price: "R$ 99,90", image: "images/camisaBranca.png", alt: "[Imagem da T-shirt Branca Gola V]"},
+                    { id: "prod012", name: "Calça Chino", price: "R$ 239,00", image: "images/calca.jpg", alt: "[Imagem da Calça Chino]"}
+                ]
+            },
+            "limitada": {
+                title: "Coleção: Edição Limitada",
+                description: "Designs exclusivos e peças únicas com unidades limitadas. Uma oportunidade para ter algo verdadeiramente especial.",
+                 products: [
+                    { id: "prod013", name: "Casaco Lã Batida Caramelo", price: "R$ 799,00", image: "https://placehold.co/400x500/D2B48C/000000?text=Limitada+1", alt: "[Imagem do Produto Casaco Caramelo]"},
+                    { id: "prod014", name: "Vestido Seda Estampado Exclusivo", price: "R$ 950,00", image: "https://placehold.co/400x500/ADD8E6/000000?text=Limitada+2", alt: "[Imagem do Vestido Seda Estampado]"},
+                 ]
+            },
+            "diaadia": {
+                title: "Coleção: Looks para o Dia a Dia",
+                description: "Conforto, praticidade e estilo para todas as suas atividades diárias, sem abrir mão da elegância minimalista.",
+                products: [
+                    { id: "prod015", name: "Moletom com Capuz Cinza Mescla", price: "R$ 220,00", image: "https://placehold.co/400x500/C0C0C0/000000?text=DiaDia+1", alt: "[Imagem do Moletom Cinza Mescla]"},
+                    { id: "prod016", name: "Legging Esportiva Preta", price: "R$ 159,00", image: "https://placehold.co/400x500/000000/FFFFFF?text=DiaDia+2", alt: "[Imagem da Legging Preta]"},
+                ]
+            },
+            "alfaiataria": {
+                title: "Coleção: Alfaiataria Moderna",
+                description: "Cortes precisos, tecidos nobres e um toque contemporâneo para a alfaiataria que transita entre o formal e o casual chic.",
+                products: [
+                    { id: "prod017", name: "Blazer Linho Azul Marinho", price: "R$ 450,00", image: "https://placehold.co/400x500/000080/FFFFFF?text=Alfaiataria+1", alt: "[Imagem do Blazer Azul Marinho]"},
+                    { id: "prod018", name: "Calça Pantalona Branca", price: "R$ 350,00", image: "https://placehold.co/400x500/FFFFFF/000000?text=Alfaiataria+2", alt: "[Imagem da Calça Pantalona Branca]"},
+                ]
+            },
+             "ecofriendly": {
+                title: "Coleção: Eco Friendly",
+                description: "Moda consciente que respeita o planeta. Peças produzidas com materiais sustentáveis e processos éticos.",
+                products: [
+                    { id: "prod019", name: "Camisa Algodão Orgânico Natural", price: "R$ 189,00", image: "https://placehold.co/400x500/F5F5DC/4F4F4F?text=Eco+1", alt: "[Imagem da Camisa Algodão Orgânico]"},
+                    { id: "prod020", name: "Bolsa Juta Reciclada", price: "R$ 120,00", image: "https://placehold.co/400x500/DEB887/000000?text=Eco+2", alt: "[Imagem da Bolsa Juta Reciclada]"},
+                ]
+            }
+        };
+
+        const currentCollection = collectionsData[collectionKey] || collectionsData["novidades"]; 
+
+        if (collectionTitleEl) collectionTitleEl.textContent = currentCollection.title;
+        if (collectionDescriptionEl) collectionDescriptionEl.textContent = currentCollection.description;
+        
+        productGridEl.innerHTML = ''; 
+        
+        if (currentCollection.products.length > 0) {
+            currentCollection.products.forEach((product, index) => {
+                const delayClass = `animation-delay-${((index % 4) + 1) * 200}`;
+                const productHTML = `
+                    <div class="product-card-item animate-fadeInUp ${delayClass}">
+                      <a href="product_page.html?id=${product.id}" class="product-card-image-link">
+                        <img src="${product.image}" alt="${product.alt}">
+                      </a>
+                      <div class="product-card-info">
+                        <h3 class="product-card-title">${product.name}</h3>
+                        <p class="product-card-price">${product.price}</p>
+                        <div class="mt-auto">
+                             <a href="product_page.html?id=${product.id}" class="btn-outline-custom btn-small w-full">Ver Detalhes</a>
+                        </div>
+                      </div>
+                    </div>
+                `;
+                productGridEl.innerHTML += productHTML;
+            });
+            
+            if (currentCollection.products.length > 8 && paginationContainerEl) {
+                paginationContainerEl.innerHTML = `
+                    <ul>
+                      <li><a href="#">Anterior</a></li>
+                      <li><span aria-current="page">1</span></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">Próximo</a></li>
+                    </ul>`;
+            } else if (paginationContainerEl) {
+                paginationContainerEl.innerHTML = '';
+            }
+
+        } else {
+            productGridEl.innerHTML = '<p class="col-span-full text-center text-gray-500">Nenhum produto encontrado nesta coleção no momento.</p>';
+            if (paginationContainerEl) paginationContainerEl.innerHTML = '';
+        }
+        if (productCountEl) productCountEl.textContent = currentCollection.products.length;
+
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VestiOne - Moda Minimalista</title>
+  <script src="https://cdn.tailwindcss.com"></script> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-inter">
+
+  <header class="header-main">
+    <div class="container-custom header-container">
+      <div class="header-logo">
+        <a href="index.html">VestiOne</a>
+      </div>
+      <nav class="header-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="collections_list_page.html">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+      </nav>
+      <a href="collections_list_page.html" class="btn-custom hidden md:inline-block">Explore Agora</a>
+      <button id="mobileMenuButton" class="mobile-menu-button md:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="index.html" class="active">Home</a>
+        <a href="collections_list_page.html">Coleções</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="login_page.html">Login</a>
+        <a href="collections_list_page.html" class="btn-custom">Explore Agora</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section hero-background-image" style="background-image: url('https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');">
+      <div class="hero-overlay"></div>
+      <div class="container-custom hero-content">
+        <h1 class="hero-title animate-fadeInUp">Vista o Novo. Viva o Agora.</h1>
+        <p class="hero-subtitle animate-fadeInUp animation-delay-300">Roupas modernas, minimalistas e feitas para você.</p>
+        <a href="collections_list_page.html" class="btn-custom btn-custom-white-text-black py-3 px-8 transform hover:scale-105 animate-fadeInUp animation-delay-600">Explorar Coleções</a>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="container-custom">
+        <div class="features-grid">
+          <div class="feature-item animate-fadeInUp">
+            <div class="feature-icon">🌟</div>
+            <h3 class="feature-title">Peças Exclusivas</h3>
+            <p class="feature-description">Moda única, direto dos melhores designers.</p>
+          </div>
+          <div class="feature-item animate-fadeInUp animation-delay-200">
+            <div class="feature-icon">🚚</div>
+            <h3 class="feature-title">Entrega Rápida</h3>
+            <p class="feature-description">Seu estilo, sem espera.</p>
+          </div>
+          <div class="feature-item animate-fadeInUp animation-delay-400">
+            <div class="feature-icon">♻️</div>
+            <h3 class="feature-title">Moda Sustentável</h3>
+            <p class="feature-description">Escolhas conscientes para um futuro melhor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="collections-home-section">
+      <div class="container-custom">
+        <h2 class="section-title animate-fadeInUp">Coleções que inspiram</h2>
+        <div class="collections-grid-home">
+          <a href="single_collection_page.html?collection=novidades" class="collection-card-home animate-fadeInUp animation-delay-200">
+              <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Novidades" alt="[Imagem da Coleção Novidades]">
+              <h4>Novidades</h4>
+          </a>
+          <a href="single_collection_page.html?collection=basicos" class="collection-card-home animate-fadeInUp animation-delay-300">
+              <img src="https://placehold.co/600x400/CBD5E0/2D3748?text=Básicos" alt="[Imagem da Coleção Básicos Essenciais]">
+              <h4>Básicos Essenciais</h4>
+          </a>
+          <a href="single_collection_page.html?collection=limitada" class="collection-card-home animate-fadeInUp animation-delay-400">
+              <img src="https://placehold.co/600x400/A0AEC0/1A202C?text=Limitada" alt="[Imagem da Coleção Edição Limitada]">
+              <h4>Edição Limitada</h4>
+          </a>
+          <a href="single_collection_page.html?collection=diaadia" class="collection-card-home animate-fadeInUp animation-delay-500">
+              <img src="https://placehold.co/600x400/718096/F7FAFC?text=Dia+a+Dia" alt="[Imagem da Coleção Looks para o dia a dia]">
+              <h4>Looks para o dia a dia</h4>
+          </a>
+        </div>
+        <a href="collections_list_page.html" class="btn-custom mt-12 py-3 px-8 animate-fadeInUp animation-delay-600">Ver todas as coleções</a>
+      </div>
+    </section>
+
+    <section class="about-section" style="background-color: #E0D7CD;">
+      <div class="container-custom">
+        <h2 class="animate-fadeInUp">Menos é mais. E mais é ser você.</h2>
+        <p class="animate-fadeInUp animation-delay-300">A VestiOne nasceu da ideia de que o estilo precisa ser simples, versátil e acessível. Nossas peças minimalistas valorizam sua identidade sem excessos.</p>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container-custom">
+        <h2 class="animate-fadeInUp">Pronto para transformar seu guarda-roupa?</h2>
+        <a href="collections_list_page.html" class="btn-custom btn-custom-white-text-black py-3 px-8 transform hover:scale-105 animate-fadeInUp animation-delay-300">Comece Agora</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-main">
+    <div class="container-custom footer-content">
+      <div class="footer-logo-social-nav-wrapper">
+        <div class="footer-logo">
+           <a href="index.html">VestiOne</a>
+        </div>
+        <div class="footer-social-links">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+        </div>
+        <div class="footer-nav-links">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+          <a href="#">Suporte</a>
+        </div>
+      </div>
+      <p class="footer-copyright">&copy; 2025 VestiOne. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden'); /* Tailwind class for display */
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.style.display = 'block';
+            } else {
+                mobileMenu.style.display = 'none';
+            }
+        });
+    }
+  </script>
+
+</body>
+</html>
